@@ -1,0 +1,222 @@
+// 字級變數
+$fontSize:(
+    fs-15:15px,
+    fs-18:18px,
+    fs-21:21px
+);
+
+@function fontSize($font-name) {
+    @return map-get($fontSize,$font-name)
+};
+
+// 色彩變數
+$colorSet:(
+    grey-8c:#8c8c8c,
+    grey-cc:#cccccc,
+    red: #e61e1e
+);
+
+@function colorSet($color-name) {
+    @return map-get($colorSet,$color-name)
+};
+
+// 擴展
+%pseudoElement {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+}
+
+// 文本設定
+body {
+    font-family: "微軟正黑體", "黑體-繁", "新細明體", Arial, Helvetica, PMingLiU, monospace, "sans-serif";
+}
+
+.brand-logo {
+    width: 136px;
+    height: 123px;
+    margin: 28px auto 30px;
+}
+
+// tabs設定
+.nav-tabs {
+    border-bottom-color: colorSet(grey-8c);
+    .nav-link {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        background-color: colorSet(grey-8c);
+        color: white;
+        &:hover,
+        &:focus {
+            border-color: colorSet(grey-8c) colorSet(grey-8c) transparent colorSet(grey-8c);
+        }
+    }
+    .nav-link.active {
+        border-color: colorSet(grey-8c) colorSet(grey-8c) transparent colorSet(grey-8c);
+    }
+}
+
+.custom-side {
+    border-width: 0 1px 1px;
+    border-style: none solid solid;
+    border-color: transparent colorSet(grey-8c) colorSet(grey-8c);
+}
+
+// 內容
+section {
+    &:nth-child(1) p {
+        font-size: fontSize(fs-18);
+        margin-bottom: 25px;
+    }
+    &:nth-child(3) {
+        margin-top: 50px;
+        h6 {
+            &::before {
+                @extend %pseudoElement;
+                content: "(1)";
+                left: 15px;
+            }
+            position: relative;
+            z-index: 0;
+            padding-left: 40px; 
+        }
+        dt:nth-child(3) h6 {
+            &::before {
+                content: "(2)";
+            }
+        }
+    }
+    &:nth-child(4) h5 {
+        &::before {
+            content: "2";
+        };
+    }
+    h5 {
+        font-size: fontSize(fs-21);
+        margin-left: 40px;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 0;
+        &::before {
+            @extend %pseudoElement;
+            content: "1";
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            background-color: colorSet(grey-8c);
+            color: white;
+            top: -2px;
+            left: -40px;
+        }
+    }
+    dl {
+        margin-left: 40px;
+    }
+    dt h6 {
+        font-size: fontSize(fs-18);
+        background-color: colorSet(grey-cc);
+        padding: 10px;
+        margin-bottom: 27px;
+    }
+}
+
+.frame {
+    border: 1px solid colorSet(grey-8c);
+    h5 {
+        font-size: fontSize(fs-21);
+    }
+}
+
+// 表格
+form {
+    padding-bottom: 27px;
+    i {
+        margin-right: 10px;
+    }
+    input {
+        padding: 6px 12px;
+        width: 100%;
+        line-height: lineHeight(lh-15);
+    }
+    button {
+        padding: 8px 58px;
+        &:hover {
+            background-color: colorSet(red) !important;
+            -ms-transform: all 0.3s ease-in-out 0s; /* IE 9 */
+            -moz-transform:all 0.3s ease-in-out 0s; /* Firefox */
+            -webkit-transform: all 0.3s ease-in-out 0s; /* Safari */
+            -o-transform:all 0.3s ease-in-out 0s;
+            transition: all 0.3s ease-in-out 0s;
+        }
+    }
+}
+
+form > div:nth-child(2) {
+    margin-bottom: 25px;
+}
+
+// 第三方帳號圖示
+.thirdParty-icon {    
+    margin: 0 0 24px 0;
+}
+
+@media (min-width: 576px) {
+    // 第三方帳號圖示
+    .thirdParty-icon {
+        width: 219px;
+    }
+}
+
+@media (min-width: 992px) {
+    // 選項卡邊距
+    .custom-interval {
+        padding: 37px 102px 0 102px!important;
+    }
+
+    // 內容
+    section {
+        &:nth-child(1) p {
+            &:last-child {
+                margin-bottom: 50px;
+            }
+        }
+        &:nth-child(n+3) {
+            margin-bottom: 92px;
+        }
+    }
+
+}
+
+@media (min-width: 1400px) {
+    // 選項卡邊距
+    .container {
+        max-width: 1099px;
+    }
+
+    // 表格
+    form {
+        padding: 27px 200px 54px 65px;
+        div:nth-child(-n+2) div {
+            &:nth-child(2) {
+                padding-left: 10px;
+            }
+        }
+    }
+}
+
+@media (max-width: 991.98px) {
+    // 內容
+    section {
+        &:nth-child(3) {
+            margin-bottom: 27px;
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    // 第三方帳號圖示
+    .thirdParty-icon {
+        width: 100%;
+    }
+}
